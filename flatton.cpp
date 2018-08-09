@@ -10,6 +10,9 @@
 #include "lodepng.h"
 
 
+#define VERSION "1.0"
+
+
 
 #define LIMIT_NR_PIXELS (8000L*10000L)
 #define LIMIT_PNG_SIZE 20000000
@@ -435,6 +438,9 @@ static unsigned int RandomColor(int x)
 
 int main(int argc, char** argv)
 {
+
+  fprintf(stderr,"flatton offline version " VERSION "\n");
+
   if (argc!=3)
   {
     fprintf(stderr,"Usage: %s [input.png] [output.png]\n\n",argv[0]);
@@ -443,7 +449,7 @@ int main(int argc, char** argv)
   const char* inputName = argv[1];
   const char* outputName = argv[2];
 
-
+  fprintf(stderr,"Flatting \"%s\" and storing result in \"%s\"\n", inputName, outputName);
 
   long contentLength=0;
   unsigned char* content = NULL;
