@@ -10,19 +10,19 @@ This offline version *does* store the result in a file (locally on your computer
 
 The advantages of this offline version over the online version are:
 
--- No need to send sensitive line art over the internet to a strange server. It is all processed locally on your computer.
--- Images can be any size. The online version only allows images up to a specific size, both in pixels and in bytes. These limits are still specified in the code, but you can increase these limits if you want to. Just change the defines LIMIT_NR_PIXELS abd LIMIT_PNG_SIZE in flatton.cpp.
--- In the future, different color schemes might be supported.
+- No need to send sensitive line art over the internet to a strange server. It is all processed locally on your computer.
+- Images can be any size. The online version only allows images up to a specific size, both in pixels and in bytes. These limits are still specified in the code, but you can increase these limits if you want to. Just change the defines LIMIT_NR_PIXELS abd LIMIT_PNG_SIZE in flatton.cpp.
+- In the future, different color schemes might be supported.
 
 The disadvantage of this offline version is that it takes more effort to use: you have to compile it first for your computer.
 
 
 ## Tips
 
--- Flatton will close opened lines if the opening is four pixels or less, but if lines are open in certain places, you can direct the flatting by closing lines first in the image you send, for best results. (You don't need to use the version with the closed lines for your final image of course.)
---  You can also open up crosshatched areas with a quick white line, to open up areas that should have the same color.
--- Areas that are marked red were initially too small, and were then either grouped into areas that were too big to remove, or they had more than one neighbor so Flatton could not decide which area to group them with.
--- Flatton occasionally returns "indexed" .PNG files for reduced file size. You may need to change the image to RGB mode before you can use it.
+- Flatton will close opened lines if the opening is four pixels or less, but if lines are open in certain places, you can direct the flatting by closing lines first in the image you send, for best results. (You don't need to use the version with the closed lines for your final image of course.)
+-  You can also open up crosshatched areas with a quick white line, to open up areas that should have the same color.
+- Areas that are marked red were initially too small, and were then either grouped into areas that were too big to remove, or they had more than one neighbor so Flatton could not decide which area to group them with.
+- Flatton occasionally returns "indexed" .PNG files for reduced file size. You may need to change the image to RGB mode before you can use it.
 
 Currently only png is supported.
 
