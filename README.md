@@ -58,7 +58,7 @@ you can do
 
 to go to a previous directory, and
 
-   cd <SomeDirectoryName>
+   cd ( SomeDirectoryName )
 
 to go to some directory. If you have these executables in a directory, and a file lines.png, you can type
 
