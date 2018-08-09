@@ -24,8 +24,8 @@ lodepng.o: lodepng.cpp
 windows:
 	i686-w64-mingw32-g++ -c -o lodepng32.obj lodepng.cpp
 	i686-w64-mingw32-g++ -c -o flatton32.obj flatton.cpp
-	i686-w64-mingw32-g++ -o flatton32.exe flatton32.obj lodepng32.obj
+	i686-w64-mingw32-g++ -static -static-libgcc -o flatton32.exe flatton32.obj lodepng32.obj
 	x86_64-w64-mingw32-g++ -c -o lodepng64.obj lodepng.cpp
 	x86_64-w64-mingw32-g++ -c -o flatton64.obj flatton.cpp
-	x86_64-w64-mingw32-g++ -o flatton64.exe flatton64.obj lodepng64.obj
+	x86_64-w64-mingw32-g++ -static -static-libgcc -o flatton64.exe flatton64.obj lodepng64.obj
 	
