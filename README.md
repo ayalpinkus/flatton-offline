@@ -50,9 +50,7 @@ This creates the file output.png, which should contain the flats.
 
 The repository contains two Windows executables: https://github.com/ayalpinkus/flatton-offline/blob/master/flatton32.exe and     https://github.com/ayalpinkus/flatton-offline/blob/master/flatton64.exe .
 
-Here's how you can open a command line prompt in Windows:
-
-        https://www.digitalcitizen.life/7-ways-launch-command-prompt-windows-7-windows-8
+Here's how you can open a command line prompt in Windows: https://www.digitalcitizen.life/7-ways-launch-command-prompt-windows-7-windows-8
 
 you can do
 
