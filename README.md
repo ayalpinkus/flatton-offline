@@ -27,7 +27,7 @@ The disadvantage of this offline version is that it takes more effort to use: yo
 Currently only png is supported.
 
 
-## Installation
+## Installing from the source code
 
 Flatton-Offline comes in source code form. On Unix-like systems (Linux, Mac OS X and others), in the source directory, type:
 
@@ -43,7 +43,42 @@ For example, there is an example01.png image file in the source directory, which
 
 This creates the file output.png, which should contain the flats.
 
-shortcomics@ayalpinkus.nl
+
+
+## Using the pre-compiled Windows binaries
+
+
+The repository contains two Windows executables:
+
+    https://github.com/ayalpinkus/flatton-offline/blob/master/flatton32.exe
+
+and
+
+    https://github.com/ayalpinkus/flatton-offline/blob/master/flatton64.exe
+
+Here's how you can open a command line prompt in Windows:
+
+        https://www.digitalcitizen.life/7-ways-launch-command-prompt-windows-7-windows-8
+
+you can do
+
+    cd ..
+
+to go to a previous directory, and
+
+   cd <SomeDirectoryName>
+
+to go to some directory. If you have these executables in a directory, and a file lines.png, you can type
+
+    flatton32.exe lines.png flats.png
+
+and a file called flats.png should appear, with the flats.
+
+
+## Contact
+
+Please feel free to contact me at shortcomics@ayalpinkus.nl
+
 
 
 
