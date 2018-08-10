@@ -43,6 +43,8 @@ For example, there is an example01.png image file in the source directory, which
 
 This creates the file output.png, which should contain the flats.
 
+If you leave out the file name for the output file, the utility will save the result to "flats.png". If you leave out the file name of the input file also, it will try to load the input line art from the file "lines.png".
+
 
 
 ## Using the pre-compiled Windows binaries
