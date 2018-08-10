@@ -10,7 +10,7 @@
 #include "lodepng.h"
 
 
-#define VERSION "1.0"
+#define VERSION "1.1"
 
 
 
@@ -436,18 +436,35 @@ static unsigned int RandomColor(int x)
  return (ir<<16) | (ig<<8) | ib;
 }
 
+#define MARK_ERROR "\n########################\n"
+
+static void Usage(const char* exename)
+{
+  fprintf(stderr,"Usage: %s [input.png] [output.png]\n",exename);
+  fprintf(stderr,"\tIf output.png is not provided, the result is saved to \"flats.png\" by default, and if \"input.png\" is not provided, the input line art is read from \"lines.png\" by default.\n\n");
+  fprintf(stderr,"[PRESS ENTER]\n");
+  char temp[256];
+  fgets(temp,255,stdin);
+  exit(-10);
+}
+
+
 int main(int argc, char** argv)
 {
 
-  fprintf(stderr,"flatton offline version " VERSION "\n");
+  fprintf(stderr,"Flatton, offline version " VERSION "\nCopyright Ayal Pinkus 2018\n");
 
-  if (argc!=3)
+  const char* inputName = "lines.png";
+  const char* outputName = "flats.png";
+
+  if (argc>1)
   {
-    fprintf(stderr,"Usage: %s [input.png] [output.png]\n\n",argv[0]);
-    exit(-1);
+    inputName = argv[1];
   }
-  const char* inputName = argv[1];
-  const char* outputName = argv[2];
+  if (argc>2)
+  {
+    outputName = argv[2];
+  }
 
   fprintf(stderr,"Flatting \"%s\" and storing result in \"%s\"\n", inputName, outputName);
 
@@ -458,8 +475,8 @@ int main(int argc, char** argv)
     FILE*f=fopen(inputName,"rb");
     if (!f)
     {
-      fprintf(stderr,"ERROR: could not open file %s for reading\n\n",inputName);
-      exit(-1);
+      fprintf(stderr,MARK_ERROR "ERROR: could not open file %s for reading." MARK_ERROR,inputName);
+      Usage(argv[0]);
     }
     fseek(f,0,SEEK_END);
     contentLength=ftell(f);
@@ -481,8 +498,8 @@ int main(int argc, char** argv)
   const unsigned char* headerPtr = (const unsigned char*)strstr((const char*)content, (const char*)pngHeader);
   if (headerPtr == NULL)
   {
-    fprintf(stderr,"The input file is not a png image. Only png is currently supported\n\n");
-    exit(-1);
+    fprintf(stderr,MARK_ERROR "ERROR: The input file is not a png image. Only png is currently supported." MARK_ERROR);
+    Usage(argv[0]);
   }
   else
   {
@@ -496,8 +513,8 @@ int main(int argc, char** argv)
 
     if (pnglen > LIMIT_PNG_SIZE)
     {
-      fprintf(stderr,"Image is %d bytes, limit is %d bytes (you can increase this limit in flatton.cpp).\n",pnglen, LIMIT_PNG_SIZE);
-      exit(-1);
+      fprintf(stderr,MARK_ERROR "ERROR: Image is %d bytes, limit is %d bytes (you can increase this limit in flatton.cpp)." MARK_ERROR,pnglen, LIMIT_PNG_SIZE);
+      Usage(argv[0]);
     }
     else
     {
@@ -511,7 +528,7 @@ int main(int argc, char** argv)
       if(error)
       {
         printf("PNG load error %u: %s\n", error, lodepng_error_text(error));
-        return 0;
+        Usage(argv[0]);
       }
       else
       {
@@ -519,8 +536,8 @@ int main(int argc, char** argv)
         nrpixels*= height;
         if (nrpixels> LIMIT_NR_PIXELS)
 	{
-          fprintf(stderr,"Image size is %dx%d, or %ld pixels. Limit is %ld. (you can increase this limit in flatton.cpp).\n", width, height, nrpixels, LIMIT_NR_PIXELS);
-	  exit(-1);
+          fprintf(stderr,MARK_ERROR "ERROR: Image size is %dx%d, or %ld pixels. Limit is %ld. (you can increase this limit in flatton.cpp)." MARK_ERROR, width, height, nrpixels, LIMIT_NR_PIXELS);
+          Usage(argv[0]);
 	}
 	else
         {
@@ -899,8 +916,8 @@ int smallPatchIndex = 0;
 	FILE*f=fopen(outputName,"wb");
 	if (!f)
 	{
-	  fprintf(stderr,"ERROR: could not open file %s for writing\n\n",outputName);
-	  exit(-1);
+	  fprintf(stderr,MARK_ERROR "ERROR: could not open file %s for writing." MARK_ERROR,outputName);
+          Usage(argv[0]);
 	}
 	fwrite(png_out, 1, pngsize_out, f);
 	fclose(f);
