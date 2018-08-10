@@ -50,6 +50,10 @@ This creates the file output.png, which should contain the flats.
 
 The repository contains two Windows executables: https://github.com/ayalpinkus/flatton-offline/blob/master/flatton32.exe and     https://github.com/ayalpinkus/flatton-offline/blob/master/flatton64.exe .
 
+If you place the executables in a folder with a file "lines.png" that contains the input line art, and you double-click on the suitable executable, you should see a file called "flats.txt" that contains the flats, after the program completes. 
+
+Alternatively, you can run it from a command prompt and choose file names.
+
 Here's how you can open a command line prompt in Windows: https://www.digitalcitizen.life/7-ways-launch-command-prompt-windows-7-windows-8
 
 you can do
