@@ -1,0 +1,14 @@
+
+
+
+==========
+2018-08-09
+Release 1.0
+First release
+
+==========
+2018-08-10
+Release 1.1
+1. Added this changelog.
+2. If no files are passed on the command line, the executable wills assume flats.png output and lines.png input. Added this for Windows users, so they can just place a file lines.png in the same folder and double-click on the executable.
+3. Ask user to press enter after an error, so people can see the error before clicking away a command prompt.
