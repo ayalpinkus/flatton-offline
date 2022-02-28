@@ -14,8 +14,8 @@
 
 
 
-#define LIMIT_NR_PIXELS (8000L*10000L)
-#define LIMIT_PNG_SIZE 20000000
+unsigned long LIMIT_NR_PIXELS = 0; // (8000L*10000L);
+#define noLIMIT_PNG_SIZE 20000000
 
 #define NARROW_LINE_COLOR 0x00333333
 
@@ -140,6 +140,11 @@ static void FloodFill(unsigned char *image_gray, unsigned int* colors, long coor
 {
   if (queue == NULL)
   {
+    if (MAX_QUEUE_ELEMS == 0)
+    {
+      fprintf(stderr,"ERROR: max queue elements not set, exiting.\n");
+      exit(-1);
+    }
     queue = (int*)malloc(MAX_QUEUE_ELEMS*sizeof(int));
   }
 
@@ -510,13 +515,14 @@ int main(int argc, char** argv)
 
 
     int pnglen = contentLength - (headerPtr-content);
-
+#if 0 // Let's not limit png file size for offline use.
     if (pnglen > LIMIT_PNG_SIZE)
     {
       fprintf(stderr,MARK_ERROR "ERROR: Image is %d bytes, limit is %d bytes (you can increase this limit in flatton.cpp)." MARK_ERROR,pnglen, LIMIT_PNG_SIZE);
       Usage(argv[0]);
     }
     else
+#endif
     {
       unsigned error;
       unsigned char* image=NULL;
@@ -534,7 +540,10 @@ int main(int argc, char** argv)
       {
         unsigned long nrpixels = width;
         nrpixels*= height;
-        if (nrpixels> LIMIT_NR_PIXELS)
+
+        LIMIT_NR_PIXELS = nrpixels+100;
+
+        if (nrpixels > LIMIT_NR_PIXELS)
 	{
           fprintf(stderr,MARK_ERROR "ERROR: Image size is %dx%d, or %ld pixels. Limit is %ld. (you can increase this limit in flatton.cpp)." MARK_ERROR, width, height, nrpixels, LIMIT_NR_PIXELS);
           Usage(argv[0]);
